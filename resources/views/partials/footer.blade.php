@@ -1,0 +1,121 @@
+<!-- Footer START -->
+<footer class="pt-5">
+    <div class="container">
+        <!-- Row START -->
+        <div class="row g-4">
+
+            <!-- Widget 1 START -->
+            <div class="col-lg-3">
+                <!-- logo -->
+                <a class="me-0" href="{{ route('home') }}">
+                    <img class="light-mode-item h-40px" src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+                    <img class="dark-mode-item h-40px" src="{{ asset('assets/images/logo-light.svg') }}" alt="logo">
+                </a>
+                <p class="my-3">{{ __('messages.site_description') }}</p>
+                <!-- Social media icon -->
+                <ul class="list-inline mb-0 mt-3">
+                    <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-facebook" href="#"><i class="fab fa-fw fa-facebook-f"></i></a> </li>
+                    <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-instagram" href="#"><i class="fab fa-fw fa-instagram"></i></a> </li>
+                    <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-twitter" href="#"><i class="fab fa-fw fa-twitter"></i></a> </li>
+                    <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-linkedin" href="#"><i class="fab fa-fw fa-linkedin-in"></i></a> </li>
+                </ul>
+            </div>
+            <!-- Widget 1 END -->
+
+            <!-- Widget 2 START -->
+            <div class="col-lg-6">
+                <div class="row g-4">
+                    <!-- Link block -->
+                    <div class="col-6 col-md-4">
+                        <h5 class="mb-2 mb-md-4">{{ __('messages.company') }}</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.about_us') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.contact_us') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.news_and_blogs') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.library') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.career') }}</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Link block -->
+                    <div class="col-6 col-md-4">
+                        <h5 class="mb-2 mb-md-4">{{ __('messages.community') }}</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.documentation') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.faq') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.forum') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.sitemap') }}</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Link block -->
+                    <div class="col-6 col-md-4">
+                        <h5 class="mb-2 mb-md-4">{{ __('messages.teaching') }}</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.become_teacher') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.how_to_guide') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">{{ __('messages.terms') }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Widget 2 END -->
+
+            <!-- Widget 3 START -->
+            <div class="col-lg-3">
+                <h5 class="mb-2 mb-md-4">{{ __('messages.contact') }}</h5>
+                <!-- Time -->
+                <p class="mb-2">
+                    {{ __('messages.toll_free') }}:<span class="h6 fw-light ms-2">+1234 568 963</span>
+                    <span class="d-block small">(9:AM to 8:PM IST)</span>
+                </p>
+
+                <p class="mb-0">{{ __('messages.email') }}:<span class="h6 fw-light ms-2">example@gmail.com</span></p>
+
+                <div class="row g-2 mt-2">
+                    <!-- Google play store button -->
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-6">
+                        <a href="#"> <img src="{{ asset('assets/images/client/google-play.svg') }}" alt=""> </a>
+                    </div>
+                    <!-- App store button -->
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-6">
+                        <a href="#"> <img src="{{ asset('assets/images/client/app-store.svg') }}" alt=""> </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Widget 3 END -->
+        </div><!-- Row END -->
+
+        <!-- Divider -->
+        <hr class="mt-4 mb-0">
+
+        <!-- Bottom footer -->
+        <div class="py-3">
+            <div class="container px-0">
+                <div class="d-md-flex justify-content-between align-items-center py-3 text-center text-md-left">
+                    <!-- copyright text -->
+                    <div class="text-primary-hover"> {{ __('messages.copyright') }} <a href="#" class="text-body">©2023 Eduport</a>. {{ __('messages.all_rights_reserved') }} </div>
+                    <!-- copyright links-->
+                    <div class=" mt-3 mt-md-0">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><!-- Language selector -->
+                                <div class="dropup mt-0 text-center text-sm-end">
+                                    <a class="dropdown-toggle nav-link" href="#" role="button" id="languageSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-globe me-2"></i>{{ __('messages.language') }}
+                                    </a>
+                                    <ul class="dropdown-menu min-w-auto" aria-labelledby="languageSwitcher">
+                                        <li><a class="dropdown-item me-4" href="{{ route('locale.switch', 'ar') }}"><img class="fa-fw me-2" src="{{ asset('assets/images/flags/sa.svg') }}" alt="">العربية</a></li>
+                                        <li><a class="dropdown-item me-4" href="{{ route('locale.switch', 'en') }}"><img class="fa-fw me-2" src="{{ asset('assets/images/flags/uk.svg') }}" alt="">English</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="list-inline-item"><a class="nav-link" href="#">{{ __('messages.terms') }}</a></li>
+                            <li class="list-inline-item"><a class="nav-link pe-0" href="#">{{ __('messages.privacy') }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer END -->
