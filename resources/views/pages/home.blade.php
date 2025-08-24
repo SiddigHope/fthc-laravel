@@ -48,7 +48,74 @@ Hero Banner START -->
                 <img src="{{ asset('assets/images/element/05.svg') }}" class="position-relative" alt="">
                 <!-- Live courses -->
                 <div class="position-absolute top-50 start-0 translate-middle-y ms-5">
-                    <div class="d-flex align-items-center bg-white rounded-3 shadow p-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =======================
+Hero Banner END -->
+
+<!-- =======================
+Featured Courses START -->
+{{-- <section class="pt-5">
+    <div class="container">
+        <!-- Title -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-0">{{ __('messages.featured_courses') }}</h2>
+                <p class="mb-0">{{ __('messages.discover_courses') }}</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Course items START -->
+            @forelse($featuredCourses as $course)
+            <div class="col-md-6 col-lg-4">
+                <!-- Course item -->
+                <div class="card shadow h-100">
+                    <!-- Image -->
+                    @if($course->inPersonDetails && $course->inPersonDetails->crsInImageEn)
+                    <img src="{{ asset('storage/' . $course->inPersonDetails->crsInImageEn) }}" class="card-img-top" alt="{{ $course->crsNameEn }}">
+                    @else
+                    <img src="{{ $course->crsImage }}" class="card-img-top" alt="{{ $course->crsNameEn }}">
+                    @endif
+
+                    <!-- Card body -->
+                    <div class="card-body pb-0">
+                        <!-- Badge and favorite -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="badge bg-primary">{{ $course->type->typNameEn }}</span>
+                            <span class="h6 fw-light mb-0">{{ $course->crsPrice }} SAR</span>
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title"><a href="{{ route('courses.show', $course->crsId) }}">{{ app()->getLocale() == 'en' ? $course->crsNameEn : $course->crsNameAr }}</a></h5>
+                        <!-- Description -->
+                        <p class="mb-2 text-truncate-2">{{ app()->getLocale() == 'en' ? $course->crsDescriptionEn : $course->crsDescriptionAr }}</p>
+                    </div>
+                    <!-- Card footer -->
+                    <div class="card-footer pt-0 pb-3">
+                        <div class="d-flex justify-content-between">
+                            <span class="h6 fw-light mb-0"><i class="fas fa-graduation-cap text-primary me-2"></i>{{ $course->specialization->spcNameEn }}</span>
+                            <span class="h6 fw-light mb-0"><i class="fas fa-calendar text-primary me-2"></i>{{ $course->crsDate->format('d M Y') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    {{ __('messages.no_courses_available') }}
+                </div>
+            </div>
+            @endforelse
+            <!-- Course items END -->
+        </div>
+    </div>
+</section> --}}
+<!-- =======================
+Featured Courses END -->
+                    {{-- <div class="d-flex align-items-center bg-white rounded-3 shadow p-3">
                         <span class="display-6 text-danger"><i class="fas fa-video"></i></span>
                         <div class="ms-3">
                             <h5 class="mb-0">{{ __('messages.live_courses') }}</h5>
@@ -59,7 +126,7 @@ Hero Banner START -->
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- =======================
 Hero Banner END -->
 
@@ -68,58 +135,15 @@ Counter START -->
 <section class="py-0 py-xl-5">
     <div class="container">
         <div class="row g-4">
-            <!-- Counter item -->
-            <div class="col-sm-6 col-xl-3">
-                <div class="d-flex justify-content-center align-items-center p-4 bg-warning bg-opacity-15 rounded-3">
-                    <span class="display-6 lh-1 text-warning mb-0"><i class="fas fa-tv"></i></span>
-                    <div class="ms-4 h6 fw-normal mb-0">
-                        <div class="d-flex">
-                            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200">10</h5>
-                            <span class="mb-0 h5">K</span>
-                        </div>
-                        <p class="mb-0">{{ __('messages.counter_online_courses') }}</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Counter item -->
-            <div class="col-sm-6 col-xl-3">
-                <div class="d-flex justify-content-center align-items-center p-4 bg-blue bg-opacity-10 rounded-3">
-                    <span class="display-6 lh-1 text-blue mb-0"><i class="fas fa-user-tie"></i></span>
-                    <div class="ms-4 h6 fw-normal mb-0">
-                        <div class="d-flex">
-                            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-delay="200">200</h5>
-                            <span class="mb-0 h5">+</span>
-                        </div>
-                        <p class="mb-0">{{ __('messages.counter_expert_tutors') }}</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Counter item -->
-            <div class="col-sm-6 col-xl-3">
-                <div class="d-flex justify-content-center align-items-center p-4 bg-purple bg-opacity-10 rounded-3">
-                    <span class="display-6 lh-1 text-purple mb-0"><i class="fas fa-user-graduate"></i></span>
-                    <div class="ms-4 h6 fw-normal mb-0">
-                        <div class="d-flex">
-                            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60" data-purecounter-delay="200">60</h5>
-                            <span class="mb-0 h5">K+</span>
-                        </div>
-                        <p class="mb-0">{{ __('messages.counter_online_students') }}</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Counter item -->
-            <div class="col-sm-6 col-xl-3">
-                <div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
-                    <span class="display-6 lh-1 text-info mb-0"><i class="bi bi-patch-check-fill"></i></span>
-                    <div class="ms-4 h6 fw-normal mb-0">
-                        <div class="d-flex">
-                            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300">6</h5>
-                            <span class="mb-0 h5">K+</span>
-                        </div>
-                        <p class="mb-0">{{ __('messages.counter_certified_courses') }}</p>
-                    </div>
-                </div>
-            </div>
+            @foreach($stats as $stat)
+                <x-ui.counter-item
+                    :icon="$stat['icon']"
+                    :count="$stat['count']"
+                    :suffix="$stat['suffix']"
+                    :label="$stat['label']"
+                    :color="$stat['color']"
+                />
+            @endforeach
         </div>
     </div>
 </section>
@@ -140,109 +164,47 @@ Popular course START -->
 
         <!-- Tabs START -->
         <ul class="nav nav-pills nav-pills-bg-soft justify-content-sm-center mb-4 px-3" id="course-pills-tab" role="tablist">
-            <!-- Tab item -->
-            <li class="nav-item me-2 me-sm-5">
-                <button class="nav-link mb-2 mb-md-0 active" id="course-pills-tab-1" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-1" type="button" role="tab" aria-controls="course-pills-tabs-1" aria-selected="true">{{ __('messages.web_design') }}</button>
-            </li>
-            <!-- Tab item -->
-            <li class="nav-item me-2 me-sm-5">
-                <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-2" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-2" type="button" role="tab" aria-controls="course-pills-tabs-2" aria-selected="false">{{ __('messages.development') }}</button>
-            </li>
-            <!-- Tab item -->
-            <li class="nav-item me-2 me-sm-5">
-                <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-3" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-3" type="button" role="tab" aria-controls="course-pills-tabs-3" aria-selected="false">{{ __('messages.graphic_design') }}</button>
-            </li>
-            <!-- Tab item -->
-            <li class="nav-item me-2 me-sm-5">
-                <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-4" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-4" type="button" role="tab" aria-controls="course-pills-tabs-4" aria-selected="false">{{ __('messages.marketing') }}</button>
-            </li>
-            <!-- Tab item -->
-            <li class="nav-item me-2 me-sm-5">
-                <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-5" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-5" type="button" role="tab" aria-controls="course-pills-tabs-5" aria-selected="false">{{ __('messages.finance') }}</button>
-            </li>
+            @foreach($specializations as $index => $specialization)
+                <li class="nav-item me-2 me-sm-5">
+                    <button
+                        class="nav-link mb-2 mb-md-0 {{ $index === 0 ? 'active' : '' }}"
+                        id="course-pills-tab-{{ $specialization->spcId }}"
+                        data-bs-toggle="pill"
+                        data-bs-target="#course-pills-tabs-{{ $specialization->spcId }}"
+                        type="button"
+                        role="tab"
+                        aria-controls="course-pills-tabs-{{ $specialization->spcId }}"
+                        aria-selected="{{ $index === 0 ? 'true' : 'false' }}"
+                    >
+                        {{ app()->getLocale() == 'en' ? $specialization->spcNameEn : $specialization->spcNameAr }}
+                    </button>
+                </li>
+            @endforeach
         </ul>
         <!-- Tabs END -->
 
         <!-- Tabs content START -->
         <div class="tab-content" id="course-pills-tabContent">
-            <!-- Content START -->
-            <div class="tab-pane fade show active" id="course-pills-tabs-1" role="tabpanel" aria-labelledby="course-pills-tab-1">
-                <div class="row g-4">
-                    <!-- Card item START -->
-                    <div class="col-sm-6 col-lg-4 col-xl-3">
-                        <div class="card shadow h-100">
-                            <!-- Image -->
-                            <img src="{{ asset('assets/images/courses/4by3/08.jpg') }}" class="card-img-top" alt="course image">
-                            <!-- Card body -->
-                            <div class="card-body pb-0">
-                                <!-- Badge and favorite -->
-                                <div class="d-flex justify-content-between mb-2">
-                                    <a href="#" class="badge bg-purple bg-opacity-10 text-purple">{{ __('messages.all_level') }}</a>
-                                    <a href="#" class="h6 mb-0"><i class="far fa-heart"></i></a>
-                                </div>
-                                <!-- Title -->
-                                <h5 class="card-title fw-normal"><a href="#">Sketch from A to Z: for app designer</a></h5>
-                                <p class="mb-2 text-truncate-2">Proposal indulged no do sociable he throwing settling.</p>
-                                <!-- Rating star -->
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
-                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li>
-                                </ul>
-                            </div>
-                            <!-- Card footer -->
-                            <div class="card-footer pt-0 pb-3">
-                                <hr>
-                                <div class="d-flex justify-content-between">
-                                    <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>12h 56m</span>
-                                    <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>15 lectures</span>
+            @foreach($specializations as $index => $specialization)
+                <div
+                    class="tab-pane fade {{ $index === 0 ? 'show active' : '' }}"
+                    id="course-pills-tabs-{{ $specialization->spcId }}"
+                    role="tabpanel"
+                    aria-labelledby="course-pills-tab-{{ $specialization->spcId }}"
+                >
+                    <div class="row g-4">
+                        @forelse($specialization->courses as $course)
+                            <x-ui.course-card :course="$course" />
+                        @empty
+                            <div class="col-12">
+                                <div class="alert alert-info text-center">
+                                    {{ __('messages.no_courses_available') }}
                                 </div>
                             </div>
-                        </div>
+                        @endforelse
                     </div>
-                    <!-- Card item END -->
-
-                    <!-- Card item START -->
-                    <div class="col-sm-6 col-lg-4 col-xl-3">
-                        <div class="card shadow h-100">
-                            <!-- Image -->
-                            <img src="{{ asset('assets/images/courses/4by3/02.jpg') }}" class="card-img-top" alt="course image">
-                            <div class="card-body pb-0">
-                                <!-- Badge and favorite -->
-                                <div class="d-flex justify-content-between mb-2">
-                                    <a href="#" class="badge bg-success bg-opacity-10 text-success">Beginner</a>
-                                    <a href="#" class="text-danger"><i class="fas fa-heart"></i></a>
-                                </div>
-                                <!-- Title -->
-                                <h5 class="card-title fw-normal"><a href="#">Graphic Design Masterclass</a></h5>
-                                <p class="mb-2 text-truncate-2">Rooms oh fully taken by worse do Points afraid but may end Rooms</p>
-                                <!-- Rating star -->
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">4.5/5.0</li>
-                                </ul>
-                            </div>
-                            <!-- Card footer -->
-                            <div class="card-footer pt-0 pb-3">
-                                <hr>
-                                <div class="d-flex justify-content-between">
-                                    <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>9h 56m</span>
-                                    <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>65 lectures</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card item END -->
                 </div>
-            </div>
-            <!-- Content END -->
+            @endforeach
         </div>
         <!-- Tabs content END -->
     </div>

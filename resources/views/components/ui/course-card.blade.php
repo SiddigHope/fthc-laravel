@@ -1,136 +1,64 @@
-@props([
-    'course',           // Course model/array with required attributes
-    'hover' => true,    // Hover effect
-    'horizontal' => false, // Horizontal layout
-    'showRating' => true,
-    'showPrice' => true,
-    'showInstructor' => true,
-    'showStats' => true
-])
+@props(['course'])
 
-@php
-    $cardClasses = [
-        'card',
-        'h-100',
-        $hover ? 'card-hover' : '',
-        $horizontal ? 'card-horizontal' : '',
-        $attributes->get('class')
-    ];
-@endphp
-
-<div class="{{ implode(' ', array_filter($cardClasses)) }}">
-    <!-- Image -->
-    <div class="position-relative">
-        <img class="card-img-top" src="{{ $course['image'] ?? asset('assets/images/courses/default.jpg') }}" alt="{{ $course['title'] }}">
-        <!-- Overlay buttons -->
-        <div class="card-img-overlay d-flex align-items-start flex-column p-3">
-            <!-- Card overlay Top -->
-            <div class="w-100 mb-auto d-flex justify-content-end">
-                <x-ui.badge type="danger" class="ms-2" pill>
-                    <i class="fas fa-heart"></i>
-                </x-ui.badge>
+<div class="col-sm-6 col-lg-4 col-xl-3">
+    <div class="card shadow h-100" onclick="window.location.href='{{ route('courses.show', $course->crsId) }}'" style="cursor: pointer;">
+        <!-- Image -->
+        <img src="{{ asset($course->crsImage ?? 'assets/images/courses/4by3/01.jpg') }}" class="card-img-top" alt="{{ app()->getLocale() == 'en' ? $course->crsNameEn : $course->crsNameAr }}">
+        <!-- Card body -->
+        <div class="card-body pb-0">
+            <!-- Badge and favorite -->
+            <div class="d-flex justify-content-between mb-2">
+                <span class="badge bg-success bg-opacity-10 text-success">
+                    {{ $course->crsStatus }}
+                </span>
+                <a href="#" class="h6 mb-0" onclick="event.stopPropagation();">
+                    <i class="far fa-heart"></i>
+                </a>
             </div>
-            <!-- Card overlay bottom -->
-            <div class="w-100 mt-auto">
-                @if(isset($course['level']))
-                    <x-ui.badge type="info" soft pill>
-                        {{ $course['level'] }}
-                    </x-ui.badge>
-                @endif
-            </div>
-        </div>
-    </div>
+            <!-- Title -->
+            <h5 class="card-title fw-normal">
+                {{ app()->getLocale() == 'en' ? $course->crsNameEn : $course->crsNameAr }}
+            </h5>
+            <p class="mb-2 text-truncate-2">
+                {{ app()->getLocale() == 'en' ? $course->crsDescriptionEn : $course->crsDescriptionAr }}
+            </p>
+            <!-- Rating stars -->
+            <ul class="list-inline mb-0">
+                @php
+                    $rating = $course->averageRating ?? 0;
+                    $fullStars = floor($rating);
+                    $halfStar = $rating - $fullStars >= 0.5;
+                @endphp
 
-    <!-- Card body -->
-    <div class="card-body pb-0">
-        <!-- Title -->
-        <h5 class="card-title fw-normal">
-            <a href="{{ route('courses.show', $course['slug']) }}" class="text-decoration-none text-dark">
-                {{ $course['title'] }}
-            </a>
+                @for($i = 1; $i <= 5; $i++)
+                    <li class="list-inline-item me-0 small">
+                        @if($i <= $fullStars)
+                            <i class="fas fa-star text-warning"></i>
+                        @elseif($i == $fullStars + 1 && $halfStar)
+                            <i class="fas fa-star-half-alt text-warning"></i>
+                        @else
+                            <i class="far fa-star text-warning"></i>
+                        @endif
+                    </li>
+                @endfor
+                <li class="list-inline-item ms-2 h6 fw-light mb-0">
+                    {{ number_format($rating, 1) }}/5.0
+                </li>
+            </ul>
         </h5>
 
-        <!-- Rating and Price -->
-        <div class="d-flex justify-content-between mb-2">
-            @if($showRating && isset($course['rating']))
-                <div class="rating-star">
-                    <span class="text-warning">
-                        @for($i = 1; $i <= 5; $i++)
-                            <i class="fas fa-star{{ $i <= $course['rating'] ? '' : '-half-alt' }}"></i>
-                        @endfor
-                    </span>
-                    <span class="text-muted ms-2">({{ $course['reviews_count'] ?? 0 }})</span>
-                </div>
-            @endif
-
-            @if($showPrice)
-                <div class="price text-end">
-                    @if(isset($course['original_price']) && $course['original_price'] > $course['price'])
-                        <span class="text-decoration-line-through text-muted me-2">
-                            ${{ number_format($course['original_price'], 2) }}
-                        </span>
-                    @endif
-                    <span class="text-success">${{ number_format($course['price'] ?? 0, 2) }}</span>
-                </div>
-            @endif
         </div>
-
-        <!-- Instructor info -->
-        @if($showInstructor && isset($course['instructor']))
-            <div class="d-flex align-items-center mb-3">
-                <div class="avatar avatar-sm">
-                    <img class="avatar-img rounded-circle"
-                         src="{{ $course['instructor']['avatar'] ?? asset('assets/images/avatar/default.jpg') }}"
-                         alt="{{ $course['instructor']['name'] }}">
-                </div>
-                <div class="ms-2">
-                    <h6 class="mb-0"><a href="#" class="text-decoration-none">{{ $course['instructor']['name'] }}</a></h6>
-                </div>
-            </div>
-        @endif
-    </div>
-
-    <!-- Card footer -->
-    @if($showStats)
+        <!-- Card footer -->
         <div class="card-footer pt-0 pb-3">
             <hr>
             <div class="d-flex justify-content-between">
                 <span class="h6 fw-light mb-0">
-                    <i class="far fa-clock text-danger me-2"></i>
-                    {{ $course['duration'] ?? '0h 0m' }}
+                    <i class="far fa-clock text-danger me-2"></i>{{ $course->crsDuration }} {{ __('messages.hours') }}
                 </span>
                 <span class="h6 fw-light mb-0">
-                    <i class="fas fa-table text-orange me-2"></i>
-                    {{ $course['lessons_count'] ?? 0 }} lessons
-                </span>
-                <span class="h6 fw-light mb-0">
-                    <i class="fas fa-signal text-success me-2"></i>
-                    {{ $course['level'] ?? 'All levels' }}
+                    <i class="fas fa-user-graduate text-orange me-2"></i>{{ $course->registrations_count ?? 0 }} {{ __('messages.students') }}
                 </span>
             </div>
         </div>
-    @endif
+    </div>
 </div>
-
-{{-- Usage Example:
-@php
-    $course = [
-        'title' => 'The Complete Web Development Course',
-        'slug' => 'complete-web-development',
-        'image' => 'path/to/image.jpg',
-        'price' => 99.99,
-        'original_price' => 199.99,
-        'rating' => 4.5,
-        'reviews_count' => 2350,
-        'duration' => '12h 30m',
-        'lessons_count' => 150,
-        'level' => 'Intermediate',
-        'instructor' => [
-            'name' => 'John Doe',
-            'avatar' => 'path/to/avatar.jpg'
-        ]
-    ];
-@endphp
-
-<x-ui.course-card :course="$course" />
---}}

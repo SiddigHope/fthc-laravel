@@ -43,13 +43,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
 
     <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/font-awesome/css/all.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/tiny-slider/tiny-slider.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/glightbox/css/glightbox.css') }}">
 
+    <!-- Bootstrap CSS -->
+
+    <!-- Font Awesome CSS -->
+    // <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/font-awesome/css/all.min.css') }}">
+
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom.css') }}">
 
     @stack('styles')
 </head>
@@ -83,6 +90,9 @@
 
 <!-- Template Functions -->
 <script src="{{ asset('assets/js/functions.js') }}"></script>
+
+<!-- Theme Switcher -->
+<script src="{{ asset('assets/js/theme-switch.js') }}"></script>
 
 @stack('scripts')
 

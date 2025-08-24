@@ -12,34 +12,85 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'users';
+    protected $primaryKey = 'usrId';
+
     protected $fillable = [
-        'name',
-        'email',
+        'usrMobile',
+        'usrEmail',
         'password',
+        'rolId',
+        'usrStatus'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'usrStatus' => 'boolean',
+        'email_verified_at' => 'datetime'
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'cntId');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'rolId');
+    }
+
+    public function traineeProfile()
+    {
+        return $this->hasOne(Trainee::class, 'usrId');
+    }
+
+    public function lecturerProfile()
+    {
+        return $this->hasOne(Lecturer::class, 'usrId');
+    }
+
+    public function adminProfile()
+    {
+        return $this->hasOne(Admin::class, 'usrId');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'usrId');
+    }
+
+    public function getNameAttribute()
+    {
+        if ($this->traineeProfile) {
+            return app()->getLocale() == 'ar' ? $this->traineeProfile->trnNameAr : $this->traineeProfile->trnNameEn;
+        }
+        if ($this->lecturerProfile) {
+            return app()->getLocale() == 'ar' ? $this->lecturerProfile->lctNameAr : $this->lecturerProfile->lctNameEn;
+        }
+        if ($this->adminProfile) {
+            return app()->getLocale() == 'ar' ? $this->adminProfile->admnNameAr : $this->adminProfile->admnNameEn;
+        }
+        return $this->usrEmail;
+    }
+
+    public function isTrainee()
+    {
+        return $this->role && $this->role->rolNameEn === 'trainee';
+    }
+
+    public function isLecturer()
+    {
+        return $this->role && $this->role->rolNameEn === 'lecturer';
+    }
+
+    public function isAdmin()
+    {
+        return $this->role && $this->role->rolNameEn === 'admin';
+    }
+
 }
